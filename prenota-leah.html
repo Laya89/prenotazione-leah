@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Prenotazione per Leah Cybul</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(to right, #fbeee6, #f7d9e3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      margin: 0;
+      padding: 20px;
+    }
+    .card {
+      background-color: white;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+      max-width: 420px;
+      width: 100%;
+      text-align: center;
+    }
+    h1 {
+      color: #c43e72;
+      font-size: 24px;
+      margin-bottom: 10px;
+    }
+    .subtitle {
+      font-size: 18px;
+      color: #555;
+      margin-bottom: 25px;
+    }
+    input, button {
+      padding: 12px;
+      margin-top: 10px;
+      width: 100%;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+      font-size: 16px;
+    }
+    button {
+      background-color: #c43e72;
+      color: white;
+      border: none;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+    button:hover {
+      background-color: #a82c5c;
+    }
+    .confirmation {
+      color: green;
+      font-weight: bold;
+      margin-top: 20px;
+    }
+    .expired {
+      color: red;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <div class="card" id="form-section">
+    <h1>Prenotazione per Leah Cybul 💖</h1>
+    <p class="subtitle">Prenota per passare un momento <strong>indimenticabile</strong> con Leah Cybul 💕✨</p>
+
+    <!-- FORM con invio email -->
+    <form id="booking-form" action="https://formsubmit.co/leah.cybul@gmail.com" method="POST">
+      <input type="hidden" name="_subject" value="Nuova prenotazione per Leah Cybul!">
+      <input type="hidden" name="_captcha" value="false">
+      <input type="hidden" name="_template" value="table">
+
+      <label for="date">Scegli una data:</label>
+      <input type="date" name="Data" required>
+
+      <label for="time">Scegli un orario:</label>
+      <input type="time" name="Orario" required>
+
+      <button type="submit">Prenota</button>
+    </form>
+
+    <div class="confirmation" id="confirmation-message" style="display:none;">
+      🎉 Grazie! La tua richiesta è stata inviata a Leah.
+    </div>
+  </div>
+
+  <script>
+    // Scadenza link dopo 24h dalla creazione
+    const creationTime = new Date("2025-05-21T12:00:00");
+    const expirationHours = 24;
+    const now = new Date();
+    const elapsedHours = (now - creationTime) / (1000 * 60 * 60);
+
+    if (elapsedHours > expirationHours) {
+      document.getElementById("form-section").innerHTML = `
+        <h1>Link Scaduto</h1>
+        <p class="expired">❌ Questo link non è più valido. La prenotazione è scaduta dopo 24 ore.</p>
+      `;
+    }
+
+    // Mostra messaggio di conferma lato client
+    const form = document.getElementById("booking-form");
+    form.addEventListener("submit", function (e) {
+      document.getElementById("booking-form").style.display = "none";
+      document.getElementById("confirmation-message").style.display = "block";
+    });
+  </script>
+</body>
+</html>
